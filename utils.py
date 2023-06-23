@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 
+
 def plot_accuracy(h, accType):
     plt.plot(h.history[accType])
     plt.plot(h.history["val_" + accType])

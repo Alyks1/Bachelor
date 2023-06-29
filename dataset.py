@@ -7,7 +7,7 @@ from PIL import Image
 
 class Dataset:
     labelList = []
-    path = "rawData/BasicImages/"
+    path = "rawData/cherryPickedBasicImages/"
 
     def __init__(self):
         self.setupDataset()

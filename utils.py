@@ -8,6 +8,7 @@ def plot_accuracy(h, accType, name):
     plt.ylabel("MAE")
     plt.xlabel("epoch")
     plt.legend(["train", "validation"], loc="upper left")
-    plt.show()
+    fig = plt.gcf()
     name = "graphs/" + name + ".png"
-    plt.savefig(name)
+    fig.savefig(name)
+    plt.show()

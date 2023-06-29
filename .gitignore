@@ -1,6 +1,9 @@
 # Any data
 data/
 rawData/
+image_regressor/
+.vscode/
+graphs/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

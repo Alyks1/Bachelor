@@ -2,11 +2,12 @@ import csv
 import os
 import shutil
 import collections
+from PIL import Image
 
 
 class Dataset:
     labelList = []
-    path = "rawData/onlyCoins/"
+    path = "rawData/BasicImages/"
 
     def __init__(self):
         self.setupDataset()
@@ -22,12 +23,12 @@ class Dataset:
                 index += 1
                 id = row[0]
                 label = row[1]
-                # trust = row[2]
+                trust = row[2]
                 # src = row[3] maybe needed in the future
                 # Use below 2 lines to regression model
                 # label = self.normalizeLabel(int(label))
-                # self.createData(id, index, label)
-                self.createCategories(label, id)
+                index = self.createData(id, index, int(label), trust)
+                # self.createCategories(label, id)
 
     def getLabelList(self):
         print(self.labelList)
@@ -46,11 +47,24 @@ class Dataset:
             os.makedirs(path)
         shutil.copyfile(imagePath, path + "/" + id + ".jpg")
 
-    def createData(self, id, index, label):
+    def createData(self, id, index, label, trust):
         # use trust here
         imagePath = self.path + id + ".jpg"
+        # Copy image Trust amount of times, to keep seperate names, increase index and return
+        # for i in range(int(2)):
+        img = Image.open(imagePath)
+        img.transpose(Image.FLIP_LEFT_RIGHT).save(
+            "data/" + str(index) + "_" + str(label) + ".jpg"
+        )
+        self.labelList.append(label)
+        index += 1
         shutil.copyfile(
             imagePath,
             "data/" + str(index) + "_" + str(label) + ".jpg",
         )
         self.labelList.append(label)
+        index += 1
+
+        # Index increases by one even if the loop is returned. This means a number is skipped, so -1
+        index -= 1
+        return index

@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 
-def plot_accuracy(h, accType):
+def plot_accuracy(h, accType, name):
     plt.plot(h.history[accType])
     plt.plot(h.history["val_" + accType])
     plt.title("model accuracy")
@@ -9,3 +9,5 @@ def plot_accuracy(h, accType):
     plt.xlabel("epoch")
     plt.legend(["train", "validation"], loc="upper left")
     plt.show()
+    name = "graphs/" + name + ".png"
+    plt.savefig(name)

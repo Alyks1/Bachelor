@@ -7,7 +7,7 @@ from PIL import Image
 
 class Dataset:
     labelList = []
-    path = "rawData/cherryPickedBasicImages/"
+    path = "rawData/onlyCoins/"
 
     def __init__(self):
         self.setupDataset()
@@ -27,8 +27,8 @@ class Dataset:
                 # src = row[3] maybe needed in the future
                 # Use below 2 lines to regression model
                 # label = self.normalizeLabel(int(label))
-                index = self.createData(id, index, int(label), trust)
-                # self.createCategories(label, id)
+                # index = self.createData(id, index, int(label), trust)
+                self.createCategories(label, id)
 
     def getLabelList(self):
         print(self.labelList)
@@ -45,6 +45,7 @@ class Dataset:
         path = rootDir + "/" + normalizedLabel
         if not os.path.exists(path):
             os.makedirs(path)
+        self.flipImage(imagePath, path + "/" + id + "_copy.jpg", label)
         shutil.copyfile(imagePath, path + "/" + id + ".jpg")
 
     def createData(self, id, index, label, trust):
@@ -52,11 +53,9 @@ class Dataset:
         imagePath = self.path + id + ".jpg"
         # Copy image Trust amount of times, to keep seperate names, increase index and return
         # for i in range(int(2)):
-        img = Image.open(imagePath)
-        img.transpose(Image.FLIP_LEFT_RIGHT).save(
-            "data/" + str(index) + "_" + str(label) + ".jpg"
+        self.flipImage(
+            imagePath, "data/" + str(index) + "_" + str(label) + ".jpg", label
         )
-        self.labelList.append(label)
         index += 1
         shutil.copyfile(
             imagePath,
@@ -68,3 +67,8 @@ class Dataset:
         # Index increases by one even if the loop is returned. This means a number is skipped, so -1
         index -= 1
         return index
+
+    def flipImage(self, path, destPath, label):
+        img = Image.open(path)
+        img.transpose(Image.FLIP_LEFT_RIGHT).save(destPath)
+        self.labelList.append(label)

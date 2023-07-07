@@ -7,7 +7,7 @@ from PIL import Image
 
 class Dataset:
     labelList = []
-    path = "rawData/onlyCoins/"
+    path = "rawData/CPBerlinKHMReddit/"
 
     def __init__(self):
         self.setupDataset()
@@ -52,11 +52,11 @@ class Dataset:
         # use trust here
         imagePath = self.path + id + ".jpg"
         # Copy image Trust amount of times, to keep seperate names, increase index and return
-        # for i in range(int(2)):
         self.flipImage(
             imagePath, "data/" + str(index) + "_" + str(label) + ".jpg", label
         )
         index += 1
+
         shutil.copyfile(
             imagePath,
             "data/" + str(index) + "_" + str(label) + ".jpg",

@@ -8,6 +8,7 @@ from PIL import Image
 class Dataset:
     labelList = []
     path = "rawData/onlyCoins/"
+    metadata = dict()
 
     def __init__(self):
         self.setupDataset()
@@ -26,9 +27,9 @@ class Dataset:
                 trust = row[2]
                 # src = row[3] maybe needed in the future
                 # Use below 2 lines to regression model
-                label = self.normalizeLabel(int(label))
-                index = self.createData(id, index, int(label), trust)
-                # self.createCategories(label, id)
+                # label = self.normalizeLabel(int(label))
+                # index = self.createData(id, index, int(label), trust)
+                self.createCategories(label, id)
 
     def getLabelList(self):
         print(self.labelList)
@@ -47,6 +48,10 @@ class Dataset:
             os.makedirs(path)
         self.flipImage(imagePath, path + "/" + id + "_copy.jpg", label)
         shutil.copyfile(imagePath, path + "/" + id + ".jpg")
+        if int(normalizedLabel) in self.metadata:
+            self.metadata[int(normalizedLabel)] += 1
+        else:
+            self.metadata[int(normalizedLabel)] = 1
 
     def createData(self, id, index, label, trust):
         # use trust here

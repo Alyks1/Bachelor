@@ -4,6 +4,7 @@ rawData/
 image_regressor/
 .vscode/
 graphs/
+*.PNG
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

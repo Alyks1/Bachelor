@@ -10,7 +10,8 @@ class Dataset:
     path = "rawData/onlyCoins/"
     metadata = dict()
 
-    def __init__(self):
+    def __init__(self, path):
+        self.path = path
         self.setupDataset()
 
     def setupDataset(self):

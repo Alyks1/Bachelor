@@ -16,17 +16,19 @@ II.  The `main.ipynb` file is used to set up the machine learning algorithms the
 
 ## Development
 
-### Requirements 
-- tensorflow
-- matplotlib
-- jupyter
-- numpy
-
 ### Installation
 
 1. Clone the repository
    
 ```$ git clone https://github.com/Alyks1/Bachelor.git  && cd Bachelor```
+
+2. Create a virtual environment to run python in
+   
+`$ python -m venv /path/to/new/virtual/environment`
+
+3. Install the requirements
+
+`$ pip install -r requirements.txt`
 
 2. Produce a dataset of images from the dataset CSV file of the dataset you wish to use. Images should be named by their ID specified in the CSV. Each image is in the format `ID,Year,Trust,ImageLink`.
    
@@ -47,3 +49,7 @@ Note: The dataset must be created independently
 7. Set the number of Epochs (default is 100) and start the cell
 8. Start the `modelEfficientNet.fit()` function cell under the EfficientNet header.
 9. Optional: Plot a graph with the results using the corresponding cell.
+
+## Licence
+
+Apache License Version 2.0
